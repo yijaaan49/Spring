@@ -1,0 +1,7 @@
+@Component를 상속받아 만들어진 어노테이션 3종류(@Service, @Repository, @Controller)
+
+어노테이션               위치                              의미 
+----------------------------------------------------------------
+@Service      XXXServiceImpl   비즈니스 로직을 처리하는 Service 클래스
+@Repository   XXXDAO           데이터베이스 연동을 처리하는 DAO 클래스
+@Controller   xxxController    사용자 요청을 제어하는 Controller 클래스

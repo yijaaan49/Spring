@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<context:component-scan base-package="com.spring.biz"></context:component-scan>
+	
+	<!-- ============ AOP 설정(xmlns:aop 추가) ============= --> 	 
+ 	<!-- AOP 적용을 어노테이션 방식으로 사용 aop:aspectj-autoproxy 태그(프로젝트 전체 스캔을 통해 어노테이션 찾음) 추가-->
+ 	<aop:aspectj-autoproxy />
+</beans>

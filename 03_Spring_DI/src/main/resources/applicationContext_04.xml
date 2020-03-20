@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+	<bean id="tv" class="polymorphism01.SamsungTV"/>
+ 	-->
+ 	
+    <!-- === 생성자를 이용한 의존성 주입(Dependency Injection) -->
+    
+    <bean id="tv2Samsung" class="polymorphism02.SamsungTV">
+    	<constructor-arg ref="sony"></constructor-arg> <!-- ref: sony를 참조한다 -->
+    	<constructor-arg value="1000000"></constructor-arg> <!-- price -->
+    </bean>
+        
+        
+    <bean id="sony" class="polymorphism02.SonySpeaker" /> 
+    <!-- sonySpeaker가 먼저 객체 생성 되어야 samsungTV에서 가져다 쓸 수 있음 -->
+    
+    
+    <!-- 생성자 전달 되는 값 순서(sony, 100, 200) : 작성된 순서대로 적용됨 -->
+    <bean id="tv2Samsung2" class="polymorphism02.SamsungTV">
+    	<constructor-arg ref="sony"></constructor-arg> <!-- ref: sony를 참조한다 -->
+    	<constructor-arg value="100"></constructor-arg> <!-- width -->
+    	<constructor-arg value="200"></constructor-arg> <!-- height -->
+    </bean>
+    
+    
+    <!-- 생성자에 전달하는 인수(파라미터값) 순서를 index 속성으로 변경가능(0부터 시작) -->
+    <!-- 생성자 전달 되는 값 순서(sony, 200, 100) -->
+    <bean id="tv2Samsung3" class="polymorphism02.SamsungTV">
+    	<constructor-arg index="0" ref="sony"></constructor-arg> <!-- ref: sony를 참조한다 -->
+    	<constructor-arg index="2" value="100"></constructor-arg> <!-- height -->
+    	<constructor-arg index="1" value="200"></constructor-arg> <!-- width -->
+    </bean>
+    
+    
+    <!--  ===== set 메소드(setter)를 이용한 의존성 주입(DI) ===== -->
+    <bean id="tv3Samsung" class="polymorphism03.SamsungTV">
+    	<property name="speaker" ref="sony3"></property>
+    	<property name="price" value="1000000"></property>
+    	<property name="width" value="200"></property>
+    	<property name="height" value="110"></property>
+    </bean>
+    
+    <bean id="sony3" class="polymorphism03.SonySpeaker" />
+    
+    <!-- p태그: 접두어(prefix) 사용방식(네임스페이스에 xmlns:p 추가)  --> <!-- setter이용 하는 것과 동일 -->
+    <bean id="tv3Samsung2" class="polymorphism03.SamsungTV" p:speaker-ref="sony3" p:price="4560000" p:width="220" p:height="110" />
+    
+    
+    <bean id="speaker" class="polymorphism04.AppleSpeaker" />
+    <bean id="tv4" class="polymorphism04.SamsungTV" p:speaker-ref="speaker" p:price="4000000" />
+    
+</beans>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+	<bean id="tv" class="polymorphism01.SamsungTV"/>
+ 	-->
+ 	
+ 	<bean id="tv" class="polymorphism01.LGTV" lazy-init="true" /> <!-- lazy-init: 나중에 생성(미리 만들어두는것이 아니라 요청시에, 나중에 만들게 됨) -->
+ 	
+ 	<!-- bean 태그 속성
+ 		- id : 요청(호출)시 사용할 명칭(유일한 명칭)
+ 		- class : 필수속성, 대상클래스(패키지.클래스명)
+ 		- lazy-init : 생성 시기 설정
+ 			(기본은 컨테이너 구동 시 객체 생성, lazy-init="true" 설정하면 요청할 때 생성)
+ 		- scope : 객체 생성 형태 정의(default는 싱글톤 : 하나의 객체 생성 사용) DAO처럼 기능들을 모아두는 하나의 객체
+ 			prototype - 요청할 때마다 새로운 객체를 생성하는 방식, lazy-init이 자동으로 설정됨
+ 			단, prototype scope인 경우 destroy-method 속성이 적용되지 않음
+ 		- init-method : 객체 생성 후 필드값 초기화 필요시 해당 메소드에서 처리
+ 		- destroy-method : 객체 소멸 시 처리할 작업을 설정하기 위한 메소드
+ 	 -->
+ 	 
+ 	<!-- 요청시 새로운 객체 생성 / init-method, destroy-method 설정 -->
+ 	<bean id="tv2Samsung" class="polymorphism02.SamsungTV" init-method="initMethod" destroy-method="destroyMethod"
+ 		scope="prototype" />
+ 	
+ 	<!-- 컨테이너 구동 시에는 객체 생성 X, 최초 요청시 객체 생성(요청할 때 딱 1개 만듦, prototype과 닮은듯 안닮음) -->
+ 	<bean id="tv2LG" class="polymorphism02.LGTV" init-method="initMethod" destroy-method="destroyMethod"
+ 		lazy-init="true" />
+ 	
+ 	
+</beans>
